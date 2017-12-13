@@ -1,0 +1,9 @@
+---
+
+- hosts: vagrant
+  become: yes
+  roles:
+    - hadoop
+    - hbase
+
+

@@ -1,0 +1,15 @@
+---
+
+java_version:
+
+# Hadoop Varabiles
+
+hadoop_artifact: 
+hadoop_dest: /usr/local/share
+user_name: hadoop
+
+
+
+# Hbase Varabiles
+
+hbase_artifact: 

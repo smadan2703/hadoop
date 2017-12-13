@@ -1,0 +1,27 @@
+References :
+
+java version  /usr/bin/java
+
+
+yum install wget -y
+wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm"
+yum localinstall jdk-8u151-linux-x64.rpm 
+
+
+
+
+
+Installing hadoop
+
+https://www.tecmint.com/install-configure-apache-hadoop-centos-7/
+
+https://www.vultr.com/docs/how-to-install-hadoop-in-stand-alone-mode-on-centos-7
+
+http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/
+
+https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#YARN_on_Single_Node
+
+https://www.youtube.com/watch?v=bYaxXIRakxM
+
+https://archanaschangale.wordpress.com/2013/08/29/installing-apache-hbase-on-ubuntu-for-standalone-mode/
+
