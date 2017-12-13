@@ -2,25 +2,28 @@
 
 - name: create user for Hadoop
   user:
-    name: {{ user_name }}
+    name: "{{ user_name }}"
     generate_ssh_keys: yes
     ssh_keys_bits: 2048
     ssh_key_file: .ssh/id_rsa
-    home: {{hadoop_dest}}
+    home: "{{hadoop_dest}}"
 
 - name: Setting up Authorized key for hadoop user
   authorized_key:
-    user: {{ user_name }}
+    user: "{{ user_name }}"
     state: present
     key: " {{ lookup('file', lookup('env', 'home') + '/.ssh/id_rsa.pub') }} "
 
 
 - name: Download Hadoop binary package
   unarchive:
-    src: {{hadoop_artifact}}
-    dest: {{hadoop_dest}}
-    owner: {{ user_name }}
-    group: {{ user_name }}
+    src: "{{hadoop_artifact}}"
+    dest: "{{hadoop_dest}}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
     remote_src: yes
 
 - name:  
+  lineinfile:
+    path: /tmp/testfile
+    line: '192.168.1.99 foo.lab.net foo'
