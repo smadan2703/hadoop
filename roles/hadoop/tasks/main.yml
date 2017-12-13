@@ -3,8 +3,8 @@
 - name: create user for Hadoop
   user:
     name: "{{ user_name }}"
-    generate_ssh_keys: yes
-    ssh_keys_bits: 2048
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
     ssh_key_file: .ssh/id_rsa
     home: "{{hadoop_dest}}"
 
