@@ -5,6 +5,7 @@
     src: "{{hbase_artifact}}.tar.gz"
     dest: "{{hbase_dest}}"
     remote_src: yes
+    register: hbaseunzip
   when: artifact
   tags: install, artifact, hbase
 
@@ -13,16 +14,18 @@
     src: "{{hbase_binary}}.tar.gz"
     dest: "{{hbase_dest}}"
   when: not artifact
+  register: hbaseunzip
   tags: install, hbase
 
-- name: Move hadoop directory
+- name: Move hbase directory
   shell: mv "{{hbase_dest}}/{{hbase_binary}}" "{{hbase_dest}}/hbase"
+  when: hbaseunzip|changed
   tags: install, hbase
 
 - name:
   lineinfile:
     path: "{{hbase_dest}}/hbase/conf/hbase-env.sh"
-    line: "export JAVA_HOME={{hbase_java_export}}"
+    line:  'export JAVA_HOME="{{hbase_java_export}}"'
 
 - name: Copy Hbase-site.yml
   template:
