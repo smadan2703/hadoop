@@ -14,6 +14,7 @@
     dest: /tmp
     remote_src: yes
   when: artifact
+  result: hadoopunzip
   tags: install, artifact, hadoop
 
 - name: Unzip Hadoop binary package from binary
@@ -21,10 +22,13 @@
     src: "{{hadoop_binary}}.tar.gz"
     dest: /tmp
   when: not artifact
+  result: hadoopunzip
   tags: install, hadoop
 
 - name: Move hadoop directory
   shell: mv /tmp/{{hadoop_binary}}/* "{{hadoop_dest}}/hadoop"
+  when: hadoopunzip|succeeded
+
   tags: install, hadoop
 
 - name: Setting up Authorized key for hadoop user
