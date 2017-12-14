@@ -1,0 +1,20 @@
+---
+
+- name: Download HBase package from Artifact
+  unarchive:
+    src: "{{hbase_artifact}}.tar.gz"
+    dest: "{{hbase_dest}}"
+    remote_src: yes
+  when: artifact
+  tags: install, artifact, hbase
+
+- name: Unzip HBase binary package from binary
+  unarchive:
+    src: "{{hbase_binary}}.tar.gz"
+    dest: "{{hbase_dest}}"
+  when: not artifact
+  tags: install, hbase
+
+- name: Move hadoop directory
+  shell: mv "{{hbase_dest}}/{{hbase_binary}} "{{hbase_dest}}/hbase"
+  tags: install, hbase
