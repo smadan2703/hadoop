@@ -1,10 +1,12 @@
 ---
 
-java_version:
+java_artifact: https://www.google.com/
+java_binary:   java8.rpm
 
 # Hadoop Varabiles
 
-hadoop_artifact: 
+hadoop_artifact: https://www.google.com/
+hadoop_binary: hbase.tar.gz
 hadoop_dest: /usr/local/share
 user_name: hadoop
 
