@@ -16,7 +16,7 @@
   tags: install, hadoop
 
 - name: Move hadoop directory
-  shell: mv /tmp/{{hadoop_artifact}} "{{hadoop_dest}}/hadoop"
+  shell: mv /tmp/{{hadoop_binary}} "{{hadoop_dest}}/hadoop"
   tags: install, hadoop
 
 - name: create user for Hadoop
