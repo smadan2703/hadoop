@@ -10,9 +10,19 @@
   shell: command -v java
   register: javaout
   ignore_errors: True
+  tags: install
 
 - name: "Install Java"
   yum:
-    name: {{ java_version }}
+    name: "{{ java_artifact }}"
     state: present
-  when: javaout > 0
+  when: javaout > 0 && artifact
+  tags: install, artifact
+
+
+- name: "Install java"
+  yum:
+    name: "{{ java_binary }}"
+    state: present
+    when: javaout > 0 && not artifact
+    tags: install

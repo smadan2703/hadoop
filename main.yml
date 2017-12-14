@@ -2,8 +2,9 @@
 
 - hosts: vagrant
   become: yes
+  vars: 
+    - artifact: false
   roles:
-    - hadoop
-    - hbase
-
-
+    - prerequisites
+#    - hadoop
+#    - hbase
