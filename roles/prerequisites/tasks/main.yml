@@ -4,6 +4,7 @@
   shell: command -v java
   register: javaout
   ignore_errors: yes
+  changed_when: false
   tags: install, java
 
 - name: "Install Java"

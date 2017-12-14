@@ -1,7 +1,7 @@
 ---
 
 java_artifact: https://www.google.com/
-java_binary:   java8.rpm
+java_binary: java8.rpm
 
 # Hadoop Varabiles
 
