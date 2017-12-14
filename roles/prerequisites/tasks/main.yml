@@ -7,7 +7,7 @@
   changed_when: false
   tags: install, java
 
-- name: "Install Java"
+- name: "Install Java from Artifact"
   yum:
     name: "{{ java_artifact }}"
     state: present
@@ -20,7 +20,7 @@
     dest: "/tmp/{{ java_binary }}"
   when: javaout.rc > 0 and not artifact  
 
-- name: "Install java"
+- name: "Install java from Local Binary"
   yum:
     name: "/tmp/{{ java_binary }}"
     state: present

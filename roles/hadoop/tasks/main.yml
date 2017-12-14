@@ -6,7 +6,7 @@
     generate_ssh_key: yes
     ssh_key_bits: 2048
     ssh_key_file: .ssh/id_rsa
-    home: "{{hadoop_dest}}"/"{{user_name}}"
+    home: "{{ hadoop_dest }}/{{ user_name }}"
   tags: install, hadoop
     
 
@@ -21,7 +21,7 @@
 - name: Download Hadoop binary package from Artifact
   unarchive:
     src: "{{hadoop_artifact}}"
-    dest: "{{hadoop_dest}}"/"{{user_name}}"
+    dest: "{{ hadoop_dest }}/{{ user_name }}"
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
     remote_src: yes
@@ -31,7 +31,7 @@
 - name: Download Hadoop binary package from binary
   unarchive:
     src: "{{hadoop_binary}}"
-    dest: "{{hadoop_dest}}"/"{{user_name}}"
+    dest: "{{ hadoop_dest }}/{{ user_name }}"
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
   when: not artifact
@@ -39,7 +39,7 @@
 
 - name:  
   lineinfile:
-    path: "{{hadoop_dest}}"/"{{user_name}}"/.bashrc_profile
+    path: "{{hadoop_dest}}/{{ user_name }}/.bashrc_profile"
     line:  "{{ item }}"
   with_items:
     - ## JAVA env variables
