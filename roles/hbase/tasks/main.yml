@@ -16,5 +16,15 @@
   tags: install, hbase
 
 - name: Move hadoop directory
-  shell: mv "{{hbase_dest}}/{{hbase_binary}} "{{hbase_dest}}/hbase"
+  shell: mv "{{hbase_dest}}/{{hbase_binary}}" "{{hbase_dest}}/hbase"
   tags: install, hbase
+
+- name:
+  lineinfile:
+    path: "{{hbase_dest}}/hbase/conf/hbase-env.sh"
+    line: "export JAVA_HOME={{hbase_java_export}}"
+
+- name: Copy Hbase-site.yml
+  template:
+    src: site.j2
+    dest: "{{hbase_dest}}/hbase/conf/hbase-site.xml"

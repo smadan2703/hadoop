@@ -14,5 +14,6 @@ user_name: hadoop
 
 # Hbase Varabiles
 
-hbase_artifact: hbase-1.2.6-bin
-hbase_binary: hbase-1.2.6-bin
+hbase_artifact: hbase-1.2.6
+hbase_binary: hbase-1.2.6
+hbase_dest: /usr/local/share
