@@ -9,14 +9,14 @@
 - name: "Check Java is installed or not"
   shell: command -v java
   register: javaout
-  ignore_errors: True
+  ignore_errors: yes
   tags: install, java
 
 - name: "Install Java"
   yum:
     name: "{{ java_artifact }}"
     state: present
-  when: javaout > 0 && artifact
+  when: artifact && javaout  > 0
   tags: install, artifact, java
 
 
@@ -24,5 +24,5 @@
   yum:
     name: "{{ java_binary }}"
     state: present
-  when: javaout > 0 && not artifact
+  when: not artifact && javaout > 0
   tags: install, java

@@ -6,5 +6,5 @@
     - artifact: false
   roles:
     - prerequisites
-    - hadoop
+#    - hadoop
 #    - hbase
