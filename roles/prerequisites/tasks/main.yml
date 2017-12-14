@@ -19,10 +19,15 @@
   when: artifact && javaout  > 0
   tags: install, artifact, java
 
+- name: "Copy Java rpm"
+  copy: 
+    src: "{{ java_binary }}"
+    dest: /tmp/"{{ java_binary }}"
+  when: not artifact && javaout > 0
 
 - name: "Install java"
   yum:
-    name: "{{ java_binary }}"
+    name: /tmp/"{{ java_binary }}"
     state: present
   when: not artifact && javaout > 0
   tags: install, java
