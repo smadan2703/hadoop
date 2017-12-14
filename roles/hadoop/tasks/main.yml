@@ -2,21 +2,22 @@
 
 - name: Download Hadoop package from Artifact
   unarchive:
-    src: "{{hadoop_artifact}}"
-    dest: "{{ hadoop_dest }}/{{ user_name }}"
+    src: "{{hadoop_artifact}}.tar.gz"
+    dest: /tmp
     remote_src: yes
   when: artifact
   tags: install, artifact, hadoop
 
 - name: Unzip Hadoop binary package from binary
   unarchive:
-    src: "{{hadoop_binary}}"
-    dest: "{{ hadoop_dest }}"
+    src: "{{hadoop_binary}}.tar.gz"
+    dest: /tmp
   when: not artifact
   tags: install, hadoop
 
--name: move hadoop
- command: mv hadoop* hadoop
+- name: Move hadoop directory
+  shell: mv /tmp/{{hadoop_artifact}} "{{hadoop_dest}}/hadoop"
+  tags: install, hadoop
 
 - name: create user for Hadoop
   user:
@@ -26,7 +27,7 @@
     ssh_key_file: .ssh/id_rsa
     home: "{{ hadoop_dest }}/{{ user_name }}"
   tags: install, hadoop
-    
+
 
 - name: Setting up Authorized key for hadoop user
   authorized_key:
@@ -35,7 +36,7 @@
     key: "{{ lookup('file', '{{ hadoop_dest }}/{{ user_name }}/.ssh/id_rsa.pub') }}"
   tags: install, hadoop
 
-- name:  
+- name:
   lineinfile:
     path: "{{hadoop_dest}}/{{ user_name }}/.bash_profile"
     line:  "{{ item }}"
