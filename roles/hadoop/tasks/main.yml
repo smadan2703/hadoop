@@ -1,4 +1,12 @@
 ---
+- name: create user for Hadoop
+  user:
+    name: "{{ user_name }}"
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+    home: "{{ hadoop_dest }}/{{ user_name }}"
+  tags: install, hadoop
 
 - name: Download Hadoop package from Artifact
   unarchive:
@@ -16,18 +24,8 @@
   tags: install, hadoop
 
 - name: Move hadoop directory
-  shell: mv /tmp/{{hadoop_binary}} "{{hadoop_dest}}/hadoop"
+  shell: mv /tmp/{{hadoop_binary}}/* "{{hadoop_dest}}/hadoop"
   tags: install, hadoop
-
-- name: create user for Hadoop
-  user:
-    name: "{{ user_name }}"
-    generate_ssh_key: yes
-    ssh_key_bits: 2048
-    ssh_key_file: .ssh/id_rsa
-    home: "{{ hadoop_dest }}/{{ user_name }}"
-  tags: install, hadoop
-
 
 - name: Setting up Authorized key for hadoop user
   authorized_key:
@@ -46,7 +44,7 @@
     - export PATH=$PATH:$JAVA_HOME/bin
     - export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
     - ## HADOOP env variables
-    - export HADOOP_HOME="{{hadoop_dest}}"/"{{user_name}}"
+    - export HADOOP_HOME="{{hadoop_dest}}/{{user_name}}"
     - export HADOOP_COMMON_HOME=$HADOOP_HOME
     - export HADOOP_HDFS_HOME=$HADOOP_HOME
     - export HADOOP_MAPRED_HOME=$HADOOP_HOME
@@ -54,3 +52,4 @@
     - export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
     - export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
     - export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
+  tags: install, hadoop

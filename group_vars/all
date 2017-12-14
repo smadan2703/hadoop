@@ -6,7 +6,7 @@ java_binary: java8.rpm
 # Hadoop Varabiles
 
 hadoop_artifact: https://www.google.com/
-hadoop_binary: hadoop-2.6.0
+hadoop_binary: hadoop-2.9.0
 hadoop_dest: /usr/local/share
 user_name: hadoop
 
