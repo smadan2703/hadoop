@@ -1,11 +1,5 @@
 ---
 
-#- name : "Download Java JDK RPM for Hadoop & Hbase"
-#  get_url:
-#    url: {{ java_version }}
-#    dest: /tmp/java.rpm
-#    mode: 0755
-
 - name: "Check Java is installed or not"
   shell: command -v java
   register: javaout
@@ -16,18 +10,18 @@
   yum:
     name: "{{ java_artifact }}"
     state: present
-  when: artifact and javaout  > 0
+  when: artifact and javaout.rc > 0
   tags: install, artifact, java
 
 - name: "Copy Java rpm"
   copy: 
     src: "{{ java_binary }}"
-    dest: /tmp/"{{ java_binary }}"
-  when: not artifact and javaout > 0
+    dest: "/tmp/{{ java_binary }}"
+  when: javaout.rc > 0 and not artifact  
 
 - name: "Install java"
   yum:
-    name: /tmp/"{{ java_binary }}"
+    name: "/tmp/{{ java_binary }}"
     state: present
-  when: not artifact and javaout > 0
+  when: javaout.rc > 0 and not artifact
   tags: install, java
