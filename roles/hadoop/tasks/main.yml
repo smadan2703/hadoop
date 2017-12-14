@@ -1,5 +1,27 @@
 ---
 
+- name: Download Hadoop package from Artifact
+  unarchive:
+    src: "{{hadoop_artifact}}"
+    dest: "{{ hadoop_dest }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    remote_src: yes
+  when: artifact
+  tags: install, artifact, hadoop
+
+- name: Unzip Hadoop binary package from binary
+  unarchive:
+    src: "{{hadoop_binary}}"
+    dest: "{{ hadoop_dest }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+  when: not artifact
+  tags: install, hadoop
+
+- name: Move Hadoop
+  command: mv hadoop* hadoop
+  
 - name: create user for Hadoop
   user:
     name: "{{ user_name }}"
@@ -9,37 +31,16 @@
     home: "{{ hadoop_dest }}/{{ user_name }}"
   tags: install, hadoop
     
-
 - name: Setting up Authorized key for hadoop user
   authorized_key:
     user: "{{ user_name }}"
     state: present
-    key: " {{ lookup('file', '{{ hadoop_dest }}/{{ user_name }}/.ssh/id_rsa.pub') }} "
-  tags: install, hadoop
-
-
-- name: Download Hadoop binary package from Artifact
-  unarchive:
-    src: "{{hadoop_artifact}}"
-    dest: "{{ hadoop_dest }}/{{ user_name }}"
-    owner: "{{ user_name }}"
-    group: "{{ user_name }}"
-    remote_src: yes
-  when: artifact
-  tags: install, artifact, hadoop
-
-- name: Download Hadoop binary package from binary
-  unarchive:
-    src: "{{hadoop_binary}}"
-    dest: "{{ hadoop_dest }}/{{ user_name }}"
-    owner: "{{ user_name }}"
-    group: "{{ user_name }}"
-  when: not artifact
+    key: "{{ lookup('file', '{{ hadoop_dest }}/{{ user_name }}/.ssh/id_rsa.pub') }}"
   tags: install, hadoop
 
 - name:  
   lineinfile:
-    path: "{{hadoop_dest}}/{{ user_name }}/.bashrc_profile"
+    path: "{{hadoop_dest}}/{{ user_name }}/.bash_profile"
     line:  "{{ item }}"
   with_items:
     - ## JAVA env variables
