@@ -19,4 +19,4 @@ hbase_binary: hbase-1.2.6
 hbase_dest: /usr/local/share
 hbase_java_export: /usr/java/default
 zookeeper_location: /home/HBase/zookeeper
-hbase_location: /home/HBase/HBase/HFiles
+hbase_location: ///home/HBase/HBase/HFiles
