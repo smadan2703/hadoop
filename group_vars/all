@@ -1,10 +1,12 @@
 ---
 
+# Java variables
+
 java_artifact: https://www.google.com/
 java_binary: java8.rpm
 java_export: /usr/java/default
 
-# Hadoop Varabiles
+# Hadoop Variables
 
 hadoop_artifact: hadoop-2.9.0
 hadoop_binary: hadoop-2.9.0
@@ -13,7 +15,7 @@ user_name: hadoop
 
 
 
-# Hbase Varabiles
+# Hbase Variables
 
 hbase_artifact: hbase-1.2.6
 hbase_binary: hbase-1.2.6
