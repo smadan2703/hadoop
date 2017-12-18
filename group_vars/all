@@ -2,6 +2,7 @@
 
 java_artifact: https://www.google.com/
 java_binary: java8.rpm
+java_export: /usr/java/default
 
 # Hadoop Varabiles
 
@@ -17,6 +18,5 @@ user_name: hadoop
 hbase_artifact: hbase-1.2.6
 hbase_binary: hbase-1.2.6
 hbase_dest: /usr/local/share
-hbase_java_export: /usr/java/default
 zookeeper_location: /home/HBase/zookeeper
 hbase_location: ///home/HBase/HBase/HFiles
