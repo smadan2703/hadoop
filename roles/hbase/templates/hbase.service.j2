@@ -1,0 +1,11 @@
+[Unit]
+Description=Hbase Service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "sh {{hadoop_dest}}/hbase/bin/start-hbase.sh"
+ExecStop=/bin/sh -c "sh {{hadoop_dest}}/hbase/bin/stop-hbase.sh"
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

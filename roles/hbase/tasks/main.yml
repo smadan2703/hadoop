@@ -31,3 +31,11 @@
   template:
     src: site.j2
     dest: "{{hbase_dest}}/hbase/conf/hbase-site.xml"
+
+- name: Copy Hbase-site.yml
+  template:
+    src: hbase.service.j2
+    dest: "/etc/systemd/system/hbase.service"
+
+- name: 
+  systemd: state=started name=hbase
